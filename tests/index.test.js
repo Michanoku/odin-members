@@ -10,3 +10,8 @@ test("GET /nonexistent should return 404", async () => {
   const res = await request(app).get("/does-not-exist");
   expect(res.statusCode).toBe(404);
 });
+
+test("GET /test-error should return 500", async () => {
+  const res = await request(app).get("/test-error");
+  expect(res.statusCode).toBe(500);
+});
