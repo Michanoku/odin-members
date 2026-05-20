@@ -63,7 +63,6 @@ const postRegister = [
     const { firstName, lastName, email, password } = matchedData(req);
     const hash = await bcrypt.hash(req.body.password, 12);
     const newUser = await db.createUser({ firstName, lastName, email, hash });
-    console.log(newUser);
     // LOGIN USER IMMEDIATELY (TODO)
     res.redirect("/");
 },
