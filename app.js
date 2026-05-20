@@ -33,7 +33,15 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // App use routes TODO
 app.use("/", indexRoutes);
-// 404 Route TODO 
+
+// 404 Route
+app.use((req, res) => {
+  res.status(404).render("error", {
+    title: "Not Found",
+    errorTitle: 404,
+    errorMessage: "This page does not exist.",
+  });
+});
 
 // Error Handler TODO
 
