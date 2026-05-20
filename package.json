@@ -38,5 +38,10 @@
     "nodemon": "^3.1.14",
     "passport-local": "^1.0.0",
     "pg": "^8.21.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.4.0",
+    "globals": "^17.6.0"
   }
 }
