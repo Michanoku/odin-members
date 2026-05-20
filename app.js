@@ -43,6 +43,17 @@ app.use((req, res) => {
   });
 });
 
-// Error Handler TODO
+// Error Handler
+app.use((err, req, res, next) => {
+  console.error(err);
+
+  const status = err.status || 500;
+
+  res.status(status).render("error", {
+    title: "Error",
+    errorTitle: status,
+    errorMessage: err.message || "Something went wrong.",
+  });
+});
 
 module.exports = app;
