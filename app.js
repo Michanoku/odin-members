@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 const path = require("path");
 
 // Import Routes TODO
+const indexRoutes = require('./routes/indexRoutes');
 
 const app = express();
 
@@ -31,7 +32,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // Theme Toggle TODO
 
 // App use routes TODO
-
+app.use("/", indexRoutes);
 // 404 Route TODO 
 
 // Error Handler TODO
