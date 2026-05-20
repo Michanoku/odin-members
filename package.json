@@ -22,7 +22,7 @@
   "type": "commonjs",
   "main": "server.js",
   "scripts": {
-    "test": "jest"
+    "test": "NODE_ENV=test jest"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
