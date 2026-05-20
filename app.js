@@ -7,6 +7,7 @@ const path = require("path");
 
 // Import Routes TODO
 const indexRoutes = require('./routes/indexRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // App use routes TODO
 app.use("/", indexRoutes);
+app.use("/", userRoutes);
 
 // 404 Route
 app.use((req, res) => {

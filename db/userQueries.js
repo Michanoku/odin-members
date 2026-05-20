@@ -20,3 +20,9 @@ const findUserById = async (userId) => {
         `, [userId]);
     return rows[0];
 }
+
+module.exports = {
+    createUser,
+    findUserByEmail,
+    findUserById,
+}
