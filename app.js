@@ -52,8 +52,10 @@ app.use(passport.session());
 
 // Logging of session
 app.use((req, res, next) => {
-  console.log(req.session);
-  console.log(req.user);
+  if (process.env.NODE_ENV !== "test") {
+    console.log(req.session);
+    console.log(req.user);
+  }
   next();
 });
 

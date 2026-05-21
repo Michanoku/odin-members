@@ -1,9 +1,19 @@
+require("dotenv").config();
 const request = require("supertest");
 const app = require("../app");
 const pool = require("../db/pool");
 
-// Get a fresh database before the test
+
 beforeAll(async () => {
+  // Throw error if the test is not running in the test setting
+  if (process.env.NODE_ENV !== "test") {
+    throw new Error("Not in test ENV. Aborting.");
+  }
+  // Throw error if the test is not running in the test db
+  if (!pool.options.database.endsWith("_test")) {
+    throw new Error("Not in test DB. Aborting.");
+  }
+  // Truncate the db before first test
   await pool.query("TRUNCATE users, messages, session RESTART IDENTITY CASCADE");
 });
 

@@ -1,6 +1,17 @@
-const pool = require("../db/pool");
+require("dotenv").config();
 const request = require("supertest");
 const app = require("../app");
+const pool = require("../db/pool");
+
+beforeAll(async () => {
+  if (process.env.NODE_ENV !== "test") {
+    throw new Error("Not in test ENV. Aborting.");
+  }
+
+  if (!pool.options.database.endsWith("_test")) {
+    throw new Error("Not in test DB. Aborting.");
+  }
+});
 
 // Wipe DB before each test to make sure everything is as expected
 beforeEach(async () => {

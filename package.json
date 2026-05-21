@@ -22,7 +22,7 @@
   "type": "commonjs",
   "main": "server.js",
   "scripts": {
-    "test": "NODE_ENV=test jest --runInBand"
+    "test": "jest --runInBand"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
