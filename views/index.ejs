@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="<%= theme %>">
 <%- include('./partials/head') %>
 
   <body>
@@ -8,9 +8,12 @@
       <% if (user) { %>
       You are logged in as <%= locals.user.email %>
         <% } else { %>
+          <div class="center-menu">
+          <div class="subtitle">You are missing out on the fun! Join now!</div>
           <div class="auth-buttons">
-            <button class="button accent" >Register</button>
-            <button class="button primary">Login</button>
+            <a href="/register" class="button accent" >Register</a>
+            <a href="/login" class="button primary">Login</a>
+          </div>
           </div>
            <% } %>
     </main>

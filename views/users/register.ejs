@@ -1,21 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
-<%- include('./partials/head') %>
+<html lang="en" data-theme="<%= theme %>">
+<%- include('../partials/head') %>
 
   <body>
-    <form action="/register" method="post">
-      <label for="firstName">First Name</label>
-      <input type="text" name="firstName" id="firstName" maxlength="64" required />
-      <label for="lastName">Last Name</label>
-      <input type="text" name="lastName" id="lastName" maxlength="64" required />
-      <label for="email">Email</label>
-      <input type="email" name="email" id="email" maxlength="255" required />
-      <label for="password">Password</label>
-      <input type="password" name="password" id="password" minlength="12" maxlength="16" required />
-      <label for="confirmation">Confirm password</label>
-      <input type="password" name="confirmation" id="confirmation" minlength="12" maxlength="16" required />
-      <button type="submit">Submit</button>
-    </form>
+    <%- include('../partials/header') %>
+      <main>
+        <form action="/register" method="post">
+          <label for="firstName">First Name</label>
+          <input type="text" name="firstName" id="firstName" maxlength="64" required />
+          <label for="lastName">Last Name</label>
+          <input type="text" name="lastName" id="lastName" maxlength="64" required />
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" maxlength="255" required />
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" minlength="12" maxlength="16" required />
+          <label for="confirmation">Confirm password</label>
+          <input type="password" name="confirmation" id="confirmation" minlength="12" maxlength="16" required />
+          <button type="submit">Submit</button>
+        </form>
+      </main>
+      <%- include('../partials/footer') %>
   </body>
 
 </html>

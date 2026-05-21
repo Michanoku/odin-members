@@ -65,6 +65,12 @@ app.use((req, res, next) => {
   next();
 });
 
+// Get theme from cookie, if any. 
+app.use((req, res, next) => {
+  res.locals.theme = req.cookies.theme || "light";
+  next();
+});
+
 // Static Files
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -73,6 +79,18 @@ app.use(express.static(path.join(__dirname, "public")));
 // App use routes TODO
 app.use("/", indexRoutes);
 app.use("/", userRoutes);
+
+// Theme toggle
+app.post("/theme/toggle", (req, res) => {
+  const current = req.cookies.theme || "light";
+  const next = current === "dark" ? "light" : "dark";
+
+  res.cookie("theme", next, {
+    maxAge: 1000 * 60 * 60 * 24 * 365,
+  });
+
+  res.json({ theme: next });
+});
 
 // 404 Route
 app.use((req, res) => {
