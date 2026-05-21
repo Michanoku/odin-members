@@ -4,9 +4,11 @@ const compression = require("compression");
 const morgan = require("morgan");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
+const pgSession = require("connect-pg-simple")(session);
 const passport = require("passport");
 require("./passport/config");
 const path = require("path");
+const pool = require("./db/pool");
 
 // Import Routes TODO
 const indexRoutes = require("./routes/indexRoutes");
@@ -27,10 +29,14 @@ app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Cookies
+// Cookies & Session
 app.use(cookieParser(process.env.SECRET));
 app.use(
   session({
+    store: new pgSession({
+      pool: pool,
+      tableName: "session"
+    }),
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: false,
@@ -41,6 +47,7 @@ app.use(
 );
 
 // Initialize passport session
+app.use(passport.initialize());
 app.use(passport.session());
 
 // Logging of session

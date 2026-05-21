@@ -19,6 +19,12 @@ CREATE TABLE IF NOT EXISTS messages (
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   user_id INTEGER references users(user_id)
 );
+
+CREATE TABLE IF NOT EXISTS session (
+  sid varchar NOT NULL PRIMARY KEY,
+  sess json NOT NULL,
+  expire timestamp(6) NOT NULL
+);
 `;
 
 async function main() {
