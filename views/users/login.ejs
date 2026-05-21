@@ -1,21 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+<%- include('./partials/head') %>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Michanoku Clubhouse || <%= title %>
-    </title>
-</head>
-
-<body>
+  <body>
     <form action="/login" method="post">
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email" maxlength="255" required />
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" minlength="12" maxlength="16" required />
-        <button type="submit">Login</button>
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" maxlength="255" required />
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" minlength="12" maxlength="16" required />
+      <button type="submit">Login</button>
     </form>
-</body>
+  </body>
 
 </html>
