@@ -85,19 +85,23 @@ footer {
   padding-block: 0.5rem;
   transition: var(--transition);
 }
-footer a {
+
+.link {
   text-decoration: none;
   color: var(--color-text);
   transition: var(--transition);
 }
-footer a:hover {
+.link:hover {
   text-decoration: underline;
 }
 
 .auth-buttons {
     display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+.login {
+    width: 100%;
 }
 
 .button {
@@ -152,6 +156,7 @@ footer a:hover {
   transform: none;
 }
 
+
 .site-title {
   font-family: "Megrim", system-ui;
   font-weight: 600;
@@ -183,4 +188,23 @@ footer a:hover {
 
 .subtitle {
     font-size: 1.25rem;
+}
+
+form {
+    display: flex; 
+    flex-direction: column;
+    gap: 0.5rem;
+    width: min(90%, 400px);
+}
+
+label {
+    display: block;
+    font-size: 1rem;
+}
+
+input {
+    border: 2px solid var(--color-text);
+    padding: 0.75rem 1.5rem;
+    font-size: 1.125rem;
+    border-radius: 9999px;
 }
