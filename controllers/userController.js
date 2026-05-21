@@ -1,9 +1,10 @@
 const bcrypt = require("bcryptjs");
 const { ResultWithContextImpl } = require("express-validator/lib/chain");
 const { body, validationResult, matchedData } = require("express-validator");
+const passport = require("passport");
 const db = require("../db/userQueries");
 
-const validateUser = [
+const validateRegister = [
   body("firstName")
     .trim()
     .notEmpty()
@@ -38,37 +39,77 @@ const validateUser = [
     .withMessage("Confirmation is required.")
     .bail()
     .custom((value, { req }) => {
-        const confirmation = req.body.password === value;
-        if (!confirmation) {
-        throw new Error('Confirmation does not match password.');
-        }
-        return true;
+      const confirmation = req.body.password === value;
+      if (!confirmation) {
+        throw new Error("Confirmation does not match password.");
+      }
+      return true;
     }),
 ];
 
+const validateLogin = [
+  body("email").trim().notEmpty().withMessage("Email is required."),
+  body("password").trim().notEmpty().withMessage("Password is required."),
+];
+
 const getRegister = (req, res) => {
-    res.render("users/register", { title: "User Registration"});
-}
+  if (req.user) {
+    return res.redirect("/");
+  }
+  res.render("users/register", { title: "User Registration" });
+};
 
 const postRegister = [
-    validateUser,
-    async (req, res) => {
+  validateRegister,
+  async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return res.status(400).render("users/register", {
-            title: "User Registration",
-            errors: errors.array(),
+      return res.status(400).render("users/register", {
+        title: "User Registration",
+        errors: errors.array(),
       });
     }
     const { firstName, lastName, email, password } = matchedData(req);
     const hash = await bcrypt.hash(req.body.password, 12);
     const newUser = await db.createUser({ firstName, lastName, email, hash });
-    // LOGIN USER IMMEDIATELY (TODO)
-    res.redirect("/");
-},
+    req.login(newUser, (err) => {
+      if (err) {
+        return next(err);
+      }
+
+      res.redirect("/");
+    });
+  },
+];
+
+const getLogin = (req, res) => {
+  if (req.user) {
+    return res.redirect("/");
+  }
+  res.render("users/login", { title: "User Login" });
+};
+
+const postLogin = [
+  validateLogin,
+  async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).render("users/login", {
+        title: "User Login",
+        errors: errors.array(),
+      });
+    }
+    next();
+  },
+  passport.authenticate("local", {
+    failureRedirect: "/login",
+    successRedirect: "/",
+  }),
 ];
 
 module.exports = {
-    getRegister,
-    postRegister,
-}
+  getRegister,
+  postRegister,
+  getLogin,
+  postLogin,
+};
