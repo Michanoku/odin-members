@@ -1,9 +1,3 @@
-.megrim-regular {
-  font-family: "Megrim", system-ui;
-  font-weight: 400;
-  font-style: normal;
-}
-
 :root {
   font-size: 16px;
   --color-primary: #6bb77b;
@@ -52,4 +46,112 @@ button {
   outline: none;
   background: transparent;
   font: inherit;
+}
+
+html {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    transition: var(--transition);
+}
+
+body {
+  width: min(100% - 1rem, 1200px);
+  margin-inline: auto;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-block: 0.5rem;
+  transition: var(--transition);
+}
+
+header {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 0.5rem;
+    transition: var(--transition);
+}
+
+footer {
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-block: 0.5rem;
+  transition: var(--transition);
+}
+footer a {
+  text-decoration: none;
+  color: var(--color-text);
+  transition: var(--transition);
+}
+footer a:hover {
+  text-decoration: underline;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font: inherit;
+  font-weight: 600;
+
+  color: var(--color-button-text);
+  padding: 0.75rem 1.5rem;
+  font-size: 1.125rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  background-color: beige;
+  text-decoration: none;
+
+  transition:
+    background-color 0.15s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    opacity 0.15s ease;
+}
+.button.big {
+  font-size: 1.25rem;
+  padding: 0.5rem 0.725rem;
+}
+.button.primary {
+  background-color: var(--color-primary);
+}
+.button.accent {
+  background-color: var(--color-accent);
+}
+.button:hover {
+  box-shadow:
+    inset 0 0 0 9999px rgb(0 0 0 / 0.2),
+    0 4px 10px rgb(0 0 0 / 0.12);
+}
+.button:active {
+  box-shadow:
+    0 2px 4px rgb(0 0 0 / 0.10);
+}
+.button:focus-visible {
+  outline: 3px solid var(--color-text-muted);
+  outline-offset: 3px;
+}
+.button:disabled,
+.button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.site-title {
+  font-family: "Megrim", system-ui;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 2rem;
 }
