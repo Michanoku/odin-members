@@ -17,7 +17,7 @@ const validateMessage = [
 ]
 
 const getNewMessage = (req, res) => {
-    res.render("newMessage", {title: "New message"});
+    res.render("messages/new", {title: "New message"});
 }
 
 const getAllMessages = () => {

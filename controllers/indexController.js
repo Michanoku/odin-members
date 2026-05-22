@@ -1,7 +1,8 @@
 const getAllMessages = require("./messageController").getAllMessages;
 
-const index = (req, res) => {
-    res.render("index", { title: "Entrance", messages: getAllMessages()});
+const index = async (req, res) => {
+    const messages = await getAllMessages();
+    res.render("index", { title: "Entrance", messages: messages});
 };
 
 const testError = (req, res, next) => {
