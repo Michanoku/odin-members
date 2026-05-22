@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const messageController = require("../controllers/messageController");
+const authMiddleware = require("../passport/authMiddleware");
 
-router.get("/new", messageController.getNewMessage);
-router.post("/new", messageController.postNewMessage);
-router.get("/delete", messageController.deleteMessage);
+router.get("/new", authMiddleware.isAuth, messageController.getNewMessage);
+router.post("/new", authMiddleware.isAuth, messageController.postNewMessage);
+router.get("/delete", authMiddleware.isAdmin, messageController.deleteMessage);
 
 module.exports = router;

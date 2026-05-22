@@ -1,3 +1,30 @@
-<% if (messages.length === 0) { %>
+<% if (messages.length===0) { %>
     No messages yet
-    <%} %>
+    <% } else { %>
+        <div class="message-list">
+            <% messages.forEach((message)=> { %>
+                <div class="message-container">
+                    <% if (user.member || user.admin ) { %>
+                        <div class="message-info">
+                            <%= message.first_name %>
+                                <%= message.last_name %> wrote on <%= new Intl.DateTimeFormat("en-US", {
+                                        dateStyle: "medium" , timeStyle: "short" }).format(new Date(message.created_at))
+                                        %>:
+                        </div>
+                        <% } else { %>
+                            <div class="message-info">
+                                Anonymous user wrote:
+                            </div>
+                            <% } %>
+                                <div class="message">
+                                    <div class="message-title">
+                                        <%= message.title %>
+                                    </div>
+                                    <div class="message-body">
+                                        <%= message.message %>
+                                    </div>
+                                </div>
+                </div>
+                <% }) %>
+        </div>
+        <% } %>

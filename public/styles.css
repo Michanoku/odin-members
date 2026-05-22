@@ -311,6 +311,27 @@ main {
   text-align: center;
 }
 
+.message-container {
+  margin-bottom: 2rem;
+}
+
+.message-info {
+  font-weight: 600;
+}
+
+.message {
+  padding: 0.5rem;
+  background-color: var(--color-hover);
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.message-title {
+  font-size: 1.25rem;
+}
+
 /* Mobile Styles */
 @media (max-width: 991px) {
   aside {

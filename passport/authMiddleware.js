@@ -1,4 +1,4 @@
-module.exports.isAuth = (req, res, next) => {
+const isAuth = (req, res, next) => {
     if (req.isAuthenticated()) {
         next();
     } else {
@@ -6,7 +6,7 @@ module.exports.isAuth = (req, res, next) => {
     } 
 }
 
-module.exports.isMember = (req, res, next) => {
+const isMember = (req, res, next) => {
     if (req.isAuthenticated() && req.user.member) {
         next();
     } else if (req.isAuthenticated()) {
@@ -16,7 +16,7 @@ module.exports.isMember = (req, res, next) => {
     }
 }
 
-module.exports.isAdmin = (req, res, next) => {
+const isAdmin = (req, res, next) => {
     if (req.isAuthenticated() && req.user.admin) {
         next();
     } else if (req.isAuthenticated()) {
@@ -24,4 +24,10 @@ module.exports.isAdmin = (req, res, next) => {
     } else {
         res.status(401).redirect("/login");
     }
+}
+
+module.exports = {
+    isAuth,
+    isMember,
+    isAdmin,
 }
