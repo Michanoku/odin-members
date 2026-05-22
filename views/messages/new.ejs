@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="<%= theme %>">
+<%- include('../partials/head') %>
+
+  <body>
+    <%- include('../partials/header') %>
+      <div class="layout">
+        <main>
+          <div class="center-menu">
+            <form action="/new" method="post">
+              <label for="title">Message Title</label>
+              <input type="text" name="title" id="title" maxlength="255" required />
+              <label for="text">Message Text</label>
+              <textarea rows="5" required></textarea>
+              <button type="submit" class="button primary">Post</button>
+            </form>
+          </div>
+        </main>
+      </div>
+      <%- include('../partials/footer') %>
+  </body>
+
+</html>

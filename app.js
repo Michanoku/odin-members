@@ -13,6 +13,7 @@ const pool = require("./db/pool");
 // Import Routes TODO
 const indexRoutes = require("./routes/indexRoutes");
 const userRoutes = require("./routes/userRoutes");
+const messageRoutes = require("./routes/messageRoutes");
 
 const app = express();
 
@@ -79,6 +80,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // App use routes TODO
 app.use("/", indexRoutes);
 app.use("/", userRoutes);
+app.use("/", messageRoutes);
 
 // Theme toggle
 app.post("/theme/toggle", (req, res) => {
