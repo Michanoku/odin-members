@@ -1,0 +1,63 @@
+<aside>
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <!-- Home icon -->
+    <symbol id="icon-home" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+      <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" />
+      <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+    </symbol>
+    <symbol id="icon-message" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+      <path
+        d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" />
+      <path d="M8 12h8" />
+      <path d="M12 8v8" />
+    </symbol>
+    <symbol id="icon-join" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+      <path d="M18 21a8 8 0 0 0-16 0" />
+      <circle cx="10" cy="8" r="5" />
+      <path d="M22 20c0-3.37-2-6.5-4-8a5 5 0 0 0-.45-8.3" />
+    </symbol>
+  </svg>
+  <% if (user) { %>
+    <nav>
+      <a href="/" class="nav-link">
+        <svg width="24" height="24" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+          <use href="#icon-home"></use>
+        </svg>
+        <div>Home</div>
+      </a>
+      <a href="/messages/new" class="nav-link">
+        <svg width="24" height="24" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+          <use href="#icon-message"></use>
+        </svg>
+        <div>New Message</div>
+      </a>
+      <a href="/join" class="nav-link">
+        <svg width="24" height="24" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+          <use href="#icon-join"></use>
+        </svg>
+        <div>Join</div>
+      </a>
+    </nav>
+    <section class="account">
+      <p>Logged in as <%= locals.user.email %>
+      </p>
+      <a href="/logout" class="button primary login">Logout</a>
+    </section>
+    <% } else { %>
+      <nav>
+        <a href="/" class="nav-link">
+          <svg width="24" height="24" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <use href="#icon-home"></use>
+          </svg>
+          <div>Home</div>
+        </a>
+      </nav>
+      <div class="account">
+        <a href="/login" class="button primary login">Login</a>
+        <div>Don't have an account? <a href="/register" class="link">Register</a></div>
+      </div>
+      <% } %>
+        <div class="copyright">Copyright &copy; 2026 <a href="https://www.github.com/michanoku"
+            class="link">Michanoku</a></div>
+        <script type="text/javascript" src="/scripts/toggleTheme.js"></script>
+</aside>

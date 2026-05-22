@@ -4,21 +4,15 @@
 
   <body>
     <%- include('./partials/header') %>
+    <div class="layout">
+    <%- include('./partials/aside') %>
       <main>
-        <% if (user) { %>
-          You are logged in as <%= locals.user.email %>
-            <% } else { %>
-              <div class="center-menu">
-                <div class="subtitle">Welcome to the clubhouse!</div>
-                <div class="auth-buttons">
-                  <a href="/login" class="button primary login">Login</a>
-                  <div>Don't have an account? <a href="/register" class="link">Register</a></div>
-                </div>
-              </div>
-              <% } %>
+        <div class="content">
+            THIS IS THE MAIN CONTENT
+        </div>
       </main>
+      </div>
       <%- include('./partials/footer') %>
-
   </body>
 
 </html>

@@ -4,12 +4,15 @@
 
   <body>
     <%- include('./partials/header') %>
-      <main>
-        <%= errorTitle %>
-          <%= errorMessage %>
-      </main>
+      <div class="layout">
+        <main>
+          <div class="content">
+            <%= errorTitle %>
+              <%= errorMessage %>
+          </div>
+        </main>
+      </div>
       <%- include('./partials/footer') %>
-
   </body>
 
 </html>

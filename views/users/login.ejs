@@ -4,18 +4,20 @@
 
   <body>
     <%- include('../partials/header') %>
-      <main>
-        <div class="center-menu">
-          <form action="/login" method="post">
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" maxlength="255" required />
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" minlength="12" maxlength="16" required />
-            <button type="submit" class="button primary">Login</button>
-            <div>Don't have an account? <a href="/register" class="link">Register</a></div>
-          </form>
-        </div>
-      </main>
+      <div class="layout">
+        <main>
+          <div class="center-menu">
+            <form action="/login" method="post">
+              <label for="email">Email</label>
+              <input type="email" name="email" id="email" maxlength="255" required />
+              <label for="password">Password</label>
+              <input type="password" name="password" id="password" minlength="12" maxlength="16" required />
+              <button type="submit" class="button primary">Login</button>
+              <div>Don't have an account? <a href="/register" class="link">Register</a></div>
+            </form>
+          </div>
+        </main>
+      </div>
       <%- include('../partials/footer') %>
   </body>
 
