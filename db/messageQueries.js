@@ -11,7 +11,7 @@ const getAllMessages = async () => {
         SELECT 
         messages.message_id, 
         messages.title, 
-        messages.text, 
+        messages.message, 
         messages.created_at, 
         users.first_name, 
         users.last_name 
