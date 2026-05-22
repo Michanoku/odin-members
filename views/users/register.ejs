@@ -6,6 +6,7 @@
     <%- include('../partials/header') %>
       <main>
         <div class="center-menu">
+           <%- include("../partials/errors.ejs") %>
           <form action="/register" method="post">
             <label for="firstName">First Name</label>
             <input type="text" name="firstName" id="firstName" maxlength="64" required />
