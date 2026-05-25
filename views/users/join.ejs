@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="<%= theme %>">
+<%- include('../partials/head') %>
+
+  <body>
+    <%- include('../partials/header') %>
+      <div class="layout">
+        <main>
+          <div class="center-menu">
+             <%- include("../partials/errors.ejs") %>
+            <form action="/join" method="post">
+              <label for="password">Enter the secret password</label>
+              <input type="password" name="password" id="password" required />
+              <button type="submit" class="button primary">Submit</button>
+            </form>
+          </div>
+        </main>
+      </div>
+      <%- include('../partials/footer') %>
+  </body>
+
+</html>
