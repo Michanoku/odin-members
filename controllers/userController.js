@@ -152,13 +152,15 @@ const postJoin = [
       });
     }
     const { password } = matchedData(req);
+    let member = false;
+    let admin = false;
     if (password === process.env.MEMBER_PASSWORD) {
-      db.changeLevel(true, false, req.user.user_id);
+      member = true;
     } else if (password === process.env.ADMIN_PASSWORD) {
-      db.changeLevel(true, true, req.user.user_id);
-    } else {
-      db.changeLevel(false, false, req.user.user_id);
+      member = true;
+      admin = true;
     }
+    await db.changeLevel(member, admin, req.user.user_id);
     res.redirect("/");
   },
 ];

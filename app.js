@@ -35,20 +35,22 @@ app.use(express.json());
 
 // Cookies & Session
 app.use(cookieParser(process.env.SECRET));
-app.use(
-  session({
-    store: new pgSession({
-      pool: pool,
-      tableName: "session"
-    }),
-    secret: process.env.SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      maxAge: 1000 * 60 * 60 * 24,
-    },
-  }),
-);
+const sessionConfig = {
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24,
+  },
+};
+if (process.env.NODE_ENV !== "test") {
+  sessionConfig.store = new pgSession({
+    pool,
+    tableName: "session",
+    createTableIfMissing: true,
+  });
+}
+app.use(session(sessionConfig));
 
 // Initialize passport session
 app.use(passport.initialize());
