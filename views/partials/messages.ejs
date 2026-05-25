@@ -4,7 +4,7 @@
         <div class="message-list">
             <% messages.forEach((message)=> { %>
                 <div class="message-container">
-                    <% if (user.member || user.admin ) { %>
+                    <% if (user && (user.member || user.admin)) { %>
                         <div class="message-info">
                             <%= message.first_name %>
                                 <%= message.last_name %> wrote on <%= new Intl.DateTimeFormat("en-US", {

@@ -39,7 +39,16 @@
       </a>
     </nav>
     <section class="account">
-      <p>Logged in as <%= locals.user.email %>
+      <p> User level: 
+        <% if (user.admin) { %>
+         Admin
+        <% } else if (user.member) { %>
+         Member
+        <% } else { %>
+         Guest
+        <% } %>
+      </p>
+      <p>Logged in as <%= user.email %>
       </p>
       <a href="/logout" class="button primary login">Logout</a>
     </section>
