@@ -332,6 +332,15 @@ main {
   font-size: 1.25rem;
 }
 
+.deleteForm {
+  width: 100%;
+  display: flex;
+}
+
+.deleteForm > button {
+  align-self: flex-end;
+}
+
 /* Mobile Styles */
 @media (max-width: 991px) {
   aside {
