@@ -1,4 +1,3 @@
-require("dotenv").config();
 const bcrypt = require("bcryptjs");
 const { ResultWithContextImpl } = require("express-validator/lib/chain");
 const { body, validationResult, matchedData } = require("express-validator");

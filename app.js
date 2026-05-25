@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const helmet = require("helmet");
 const compression = require("compression");
@@ -24,7 +25,9 @@ app.set("views", path.join(__dirname, "views"));
 // Middleware for logging and so on
 app.use(helmet());
 app.use(compression());
-app.use(morgan("dev"));
+if (process.env.NODE_ENV !== "test") {
+  app.use(morgan("dev"));
+}
 
 // Formdata and JSON
 app.use(express.urlencoded({ extended: true }));

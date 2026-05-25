@@ -23,7 +23,7 @@
                                     <div class="message-body">
                                         <%= message.message %>
                                     </div>
-                                    <% if (user.admin) { %>
+                                    <% if (user && user.admin) { %>
                                         <form class="deleteForm" action="/delete" method="post">
                                             <input type="hidden" value="<%= message.message_id %>" name="messageId"/>
                                             <button type="submit" class="button accent">Delete</button>
@@ -34,6 +34,6 @@
                 <% }) %>
         </div>
         <% } %>
-<% if (user.admin) { %>
+<% if (user && user.admin) { %>
     <script type="text/javascript" src="/scripts/confirmDelete.js"></script>
 <% } %>
