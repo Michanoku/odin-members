@@ -21,8 +21,15 @@ const findUserById = async (userId) => {
     return rows[0];
 }
 
+const changeLevel = async (member, admin, userId) => {
+    await pool.query(`
+        UPDATE users SET member = $1, admin = $2 WHERE user_id = $3;
+        `, [member, admin, userId]);
+}
+
 module.exports = {
     createUser,
     findUserByEmail,
     findUserById,
+    changeLevel,
 }
