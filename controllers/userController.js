@@ -1,3 +1,4 @@
+require("dotenv").config();
 const bcrypt = require("bcryptjs");
 const { ResultWithContextImpl } = require("express-validator/lib/chain");
 const { body, validationResult, matchedData } = require("express-validator");
@@ -50,6 +51,25 @@ const validateRegister = [
 const validateLogin = [
   body("email").trim().notEmpty().withMessage("Email is required."),
   body("password").trim().notEmpty().withMessage("Password is required."),
+];
+
+const validatePassword = [
+  body("password")
+    .trim()
+    .notEmpty()
+    .withMessage("Password is required.")
+    .custom((value, { req }) => {
+      const secretPasswords = [
+        req.user.member
+        ? process.env.ADMIN_PASSWORD
+        : process.env.MEMBER_PASSWORD,
+        process.env.RESET_PASSWORD
+      ];
+      if (!secretPasswords.includes(value)) {
+        throw new Error("Invalid secret password.");
+      }
+      return true;
+    })
 ];
 
 const getRegister = (req, res) => {
@@ -111,10 +131,38 @@ const getLogout = (req, res, next) => {
   req.logout((err) => {
     if (err) {
       return next(err);
-    } 
+    }
     res.redirect("/");
   });
 };
+
+const getJoin = (req, res) => {
+  res.render("users/join", {
+    title: "Join the club",
+  })
+}
+
+const postJoin = [
+  validatePassword,
+  async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).render("users/join", {
+        title: "Join the club",
+        errors: errors.array(),
+      });
+    }
+    const { password } = matchedData(req);
+    if (password === process.env.MEMBER_PASSWORD) {
+      db.changeLevel(true, false, req.user.user_id);
+    } else if (password === process.env.ADMIN_PASSWORD) {
+      db.changeLevel(true, true, req.user.user_id);
+    } else {
+      db.changeLevel(false, false, req.user.user_id);
+    }
+    res.redirect("/");
+  },
+];
 
 module.exports = {
   getRegister,
@@ -122,4 +170,6 @@ module.exports = {
   getLogin,
   postLogin,
   getLogout,
+  getJoin,
+  postJoin,
 };
