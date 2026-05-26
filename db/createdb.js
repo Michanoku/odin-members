@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS clubhouse_messages (
   title VARCHAR(255) NOT NULL,
   message TEXT NOT NULL,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  user_id INTEGER references users(user_id)
+  user_id INTEGER references clubhouse_users(user_id)
 );
 
 CREATE TABLE IF NOT EXISTS clubhouse_session (
