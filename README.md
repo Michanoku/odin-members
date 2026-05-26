@@ -6,6 +6,22 @@ Users can register, log in, post messages, join the clubhouse through secret pas
 
 ---
 
+## Live Site
+
+Live Demo: [Coming Soon](#)
+
+### Demo Passwords
+
+The live demo includes public passwords so visitors can test different permission levels.
+
+| Password | Function |
+|---|---|
+| `iwannabecool` | Become a Member |
+| `iwannabetheverybest` | Become an Admin |
+| `reset` | Reset Member/Admin status |
+
+---
+
 ## Features
 
 ### Authentication & Authorization

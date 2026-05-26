@@ -22,7 +22,8 @@
   "type": "commonjs",
   "main": "server.js",
   "scripts": {
-    "test": "jest --runInBand"
+    "test": "jest --runInBand",
+    "populate": "node db/createdb.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
