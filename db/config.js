@@ -1,12 +1,10 @@
 const dbMap = {
-  development: "dev",
-  test: "test",
-  production: "prod",
+  development: `${process.env.DB_NAME}_dev`,
+  test: `${process.env.DB_NAME}_test`,
+  production: "messages_t1eu",
 };
 
-const db = dbMap[process.env.NODE_ENV] || "dev";
-
-const dbName = `${process.env.DB_NAME}_${db}`;
+const dbName = dbMap[process.env.NODE_ENV] || dbMap.development;
 
 module.exports = {
   host: process.env.DB_HOST,

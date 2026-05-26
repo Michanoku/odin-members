@@ -23,7 +23,8 @@
   "main": "server.js",
   "scripts": {
     "test": "jest --runInBand",
-    "populate": "node db/createdb.js"
+    "populate": "node db/createdb.js",
+    "start": "node server.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
