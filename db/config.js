@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const dbMap = {
   development: `${process.env.DB_NAME}_dev`,
   test: `${process.env.DB_NAME}_test`,

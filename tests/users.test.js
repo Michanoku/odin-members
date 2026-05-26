@@ -13,7 +13,7 @@ beforeAll(async () => {
   }
   // Truncate the db before first test
   await pool.query(
-    "TRUNCATE users, messages, session RESTART IDENTITY CASCADE",
+    "TRUNCATE clubhouse_users, clubhouse_messages, clubhouse_session RESTART IDENTITY CASCADE",
   );
 });
 

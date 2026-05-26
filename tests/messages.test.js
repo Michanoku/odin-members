@@ -13,7 +13,7 @@ beforeAll(async () => {
   }
   // Truncate the db before first test
   await pool.query(
-    "TRUNCATE users, messages, session RESTART IDENTITY CASCADE",
+    "TRUNCATE clubhouse_users, clubhouse_messages, clubhouse_session RESTART IDENTITY CASCADE",
   );
 
   // Create the user used for the test
@@ -98,7 +98,7 @@ test("guest user can't delete messages", async () => {
     password: "supersecure123",
   });
 
-  const { rows } = await pool.query("SELECT message_id FROM messages");
+  const { rows } = await pool.query("SELECT message_id FROM clubhouse_messages");
 
   const response = await agent.post("/delete").send({
     messageId: rows[0],
@@ -109,7 +109,7 @@ test("guest user can't delete messages", async () => {
 });
 
 test("member user can read names and times", async () => {
-  await pool.query("UPDATE users SET member = true");
+  await pool.query("UPDATE clubhouse_users SET member = true");
 
   const agent = request.agent(app);
 
@@ -146,7 +146,7 @@ test("member user can't delete messages", async () => {
     password: "supersecure123",
   });
 
-  const { rows } = await pool.query("SELECT message_id FROM messages");
+  const { rows } = await pool.query("SELECT message_id FROM clubhouse_messages");
 
   const response = await agent.post("/delete").send({
     messageId: rows[0].message_id,
@@ -157,7 +157,7 @@ test("member user can't delete messages", async () => {
 });
 
 test("admin user can see delete button", async () => {
-  await pool.query("UPDATE users SET admin = true");
+  await pool.query("UPDATE clubhouse_users SET admin = true");
 
   const agent = request.agent(app);
 
@@ -178,7 +178,7 @@ test("admin user can delete messages", async () => {
     password: "supersecure123",
   });
 
-  const { rows } = await pool.query("SELECT message_id FROM messages");
+  const { rows } = await pool.query("SELECT message_id FROM clubhouse_messages");
 
   const response = await agent.post("/delete").send({
     messageId: rows[0].message_id,

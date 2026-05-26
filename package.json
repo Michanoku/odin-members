@@ -24,7 +24,8 @@
   "scripts": {
     "test": "jest --runInBand",
     "populate": "node db/createdb.js",
-    "start": "node server.js"
+    "start": "node server.js", 
+    "populate-test": "NODE_ENV=test node db/createdb.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",

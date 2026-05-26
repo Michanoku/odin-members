@@ -2,7 +2,7 @@ const { Client } = require("pg");
 const config = require("./config");
 
 const SQL = `
-CREATE TABLE IF NOT EXISTS users (
+CREATE TABLE IF NOT EXISTS clubhouse_users (
   user_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   first_name VARCHAR(64) NOT NULL,
   last_name VARCHAR(64) NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS users (
   admin BOOLEAN NOT NULL DEFAULT FALSE
 );
 
-CREATE TABLE IF NOT EXISTS messages (
+CREATE TABLE IF NOT EXISTS clubhouse_messages (
   message_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   title VARCHAR(255) NOT NULL,
   message TEXT NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS messages (
   user_id INTEGER references users(user_id)
 );
 
-CREATE TABLE IF NOT EXISTS session (
+CREATE TABLE IF NOT EXISTS clubhouse_session (
   sid varchar NOT NULL PRIMARY KEY,
   sess json NOT NULL,
   expire timestamp(6) NOT NULL

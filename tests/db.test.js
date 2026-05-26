@@ -13,7 +13,7 @@ beforeAll(async () => {
 
   // Wipe DB before test
   await pool.query(
-    "TRUNCATE users, messages, session RESTART IDENTITY CASCADE",
+    "TRUNCATE clubhouse_users, clubhouse_messages, clubhouse_session RESTART IDENTITY CASCADE",
   );
 });
 
@@ -30,7 +30,7 @@ test("User is saved to DB correctly.", async () => {
     confirmation: "supersecure123",
   });
 
-  const result = await pool.query("SELECT * FROM users WHERE email = $1", [
+  const result = await pool.query("SELECT * FROM clubhouse_users WHERE email = $1", [
     "test@test.com",
   ]);
 
@@ -52,7 +52,7 @@ test("message is saved to database correctly", async () => {
   });
 
   const { rows } = await pool.query(
-    "SELECT * FROM messages WHERE title = $1",
+    "SELECT * FROM clubhouse_messages WHERE title = $1",
     ["Hello"]
   );
 
@@ -74,7 +74,7 @@ test("member status is saved correctly", async () => {
   });
 
   const { rows } = await pool.query(
-    "SELECT member FROM users WHERE email = $1",
+    "SELECT member FROM clubhouse_users WHERE email = $1",
     ["test@test.com"],
   );
 
@@ -94,7 +94,7 @@ test("admin status is saved correctly", async () => {
   });
 
   const { rows } = await pool.query(
-    "SELECT admin FROM users WHERE email = $1",
+    "SELECT admin FROM clubhouse_users WHERE email = $1",
     ["test@test.com"],
   );
 
@@ -114,7 +114,7 @@ test("status is reset correctly", async () => {
   });
 
   const { rows } = await pool.query(
-    "SELECT member, admin FROM users WHERE email = $1",
+    "SELECT member, admin FROM clubhouse_users WHERE email = $1",
     ["test@test.com"],
   );
 

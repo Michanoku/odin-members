@@ -3,7 +3,7 @@ const pool = require("./pool");
 const createUser = async ({ firstName, lastName, email, hash }) => {
   const { rows } = await pool.query(
     `
-        INSERT INTO users (first_name, last_name, email, hash) VALUES ($1, $2, $3, $4) RETURNING *;
+        INSERT INTO clubhouse_users (first_name, last_name, email, hash) VALUES ($1, $2, $3, $4) RETURNING *;
         `,
     [firstName, lastName, email, hash],
   );
@@ -13,7 +13,7 @@ const createUser = async ({ firstName, lastName, email, hash }) => {
 const findUserByEmail = async (email) => {
   const { rows } = await pool.query(
     `
-        SELECT * FROM users WHERE email = $1;
+        SELECT * FROM clubhouse_users WHERE email = $1;
         `,
     [email],
   );
@@ -23,7 +23,7 @@ const findUserByEmail = async (email) => {
 const findUserById = async (userId) => {
   const { rows } = await pool.query(
     `
-        SELECT * FROM users WHERE user_id = $1;
+        SELECT * FROM clubhouse_users WHERE user_id = $1;
         `,
     [userId],
   );
@@ -33,7 +33,7 @@ const findUserById = async (userId) => {
 const changeLevel = async (member, admin, userId) => {
   await pool.query(
     `
-        UPDATE users SET member = $1, admin = $2 WHERE user_id = $3;
+        UPDATE clubhouse_users SET member = $1, admin = $2 WHERE user_id = $3;
         `,
     [member, admin, userId],
   );
