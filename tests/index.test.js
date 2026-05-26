@@ -15,3 +15,15 @@ test("GET /test-error should return 500", async () => {
   const res = await request(app).get("/test-error");
   expect(res.statusCode).toBe(500);
 });
+
+test("theme toggle switches theme cookie", async () => {
+  const response = await request(app)
+    .post("/theme/toggle")
+    .set("Cookie", ["theme=light"]);
+
+  expect(response.body.theme).toBe("dark");
+
+  expect(response.headers["set-cookie"][0]).toContain(
+    "theme=dark"
+  );
+});
