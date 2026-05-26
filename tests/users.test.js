@@ -40,6 +40,26 @@ test("register logs in and redirects after success", async () => {
   expect(loggedInResponse.text).toContain("test@test.com");
 });
 
+test("duplicate email registration fails", async () => {
+  await request(app).post("/register").send({
+    firstName: "Test",
+    lastName: "User",
+    email: "duplicate@test.com",
+    password: "supersecure123",
+    confirmation: "supersecure123",
+  });
+
+  const response = await request(app).post("/register").send({
+    firstName: "Test2",
+    lastName: "User2",
+    email: "duplicate@test.com",
+    password: "supersecure123",
+    confirmation: "supersecure123",
+  });
+
+  expect(response.text).toContain("Email already exists");
+});
+
 test("user can log in and is redirected to home", async () => {
   const agent = request.agent(app);
 

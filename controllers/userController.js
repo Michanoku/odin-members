@@ -25,7 +25,16 @@ const validateRegister = [
     .withMessage("Email is required.")
     .bail()
     .isEmail()
-    .withMessage(`Email must be a valid email address.`),
+    .withMessage(`Email must be a valid email address.`)
+    .custom(async (value) => {
+      const user = await db.findUserByEmail(value);
+
+      if (user) {
+        throw new Error("Email already exists.");
+      }
+
+      return true;
+    }),
   body("password")
     .trim()
     .notEmpty()
@@ -60,15 +69,15 @@ const validatePassword = [
     .custom((value, { req }) => {
       const secretPasswords = [
         req.user.member
-        ? process.env.ADMIN_PASSWORD
-        : process.env.MEMBER_PASSWORD,
-        process.env.RESET_PASSWORD
+          ? process.env.ADMIN_PASSWORD
+          : process.env.MEMBER_PASSWORD,
+        process.env.RESET_PASSWORD,
       ];
       if (!secretPasswords.includes(value)) {
         throw new Error("Invalid secret password.");
       }
       return true;
-    })
+    }),
 ];
 
 const getRegister = (req, res) => {
@@ -138,8 +147,8 @@ const getLogout = (req, res, next) => {
 const getJoin = (req, res) => {
   res.render("users/join", {
     title: "Join the club",
-  })
-}
+  });
+};
 
 const postJoin = [
   validatePassword,
