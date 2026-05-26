@@ -2,7 +2,6 @@ const request = require("supertest");
 const app = require("../app");
 const pool = require("../db/pool");
 
-
 beforeAll(async () => {
   // Throw error if the test is not running in the test setting
   if (process.env.NODE_ENV !== "test") {
@@ -13,7 +12,9 @@ beforeAll(async () => {
     throw new Error("Not in test DB. Aborting.");
   }
   // Truncate the db before first test
-  await pool.query("TRUNCATE users, messages, session RESTART IDENTITY CASCADE");
+  await pool.query(
+    "TRUNCATE users, messages, session RESTART IDENTITY CASCADE",
+  );
 });
 
 afterAll(async () => {
@@ -81,7 +82,7 @@ test("logged-in user is redirected away from register page", async () => {
   expect(response.headers.location).toBe("/");
 });
 
-test("user is a guest at first", async() => {
+test("user is a guest at first", async () => {
   const agent = request.agent(app);
 
   await agent.post("/login").send({
@@ -94,7 +95,7 @@ test("user is a guest at first", async() => {
   expect(index.text).toContain("Guest");
 });
 
-test("user can navigate to join page", async() =>{
+test("user can navigate to join page", async () => {
   const agent = request.agent(app);
 
   await agent.post("/login").send({
@@ -103,10 +104,10 @@ test("user can navigate to join page", async() =>{
   });
 
   const join = await agent.get("/join");
-   expect(join.status).toBe(200);
+  expect(join.status).toBe(200);
 });
 
-test("user receives error when submitting wrong password", async() =>{
+test("user receives error when submitting wrong password", async () => {
   const agent = request.agent(app);
 
   await agent.post("/login").send({
@@ -120,7 +121,7 @@ test("user receives error when submitting wrong password", async() =>{
   expect(response.text).toContain("Invalid secret password.");
 });
 
-test("user can enter the correct password and become a member", async() =>{
+test("user can enter the correct password and become a member", async () => {
   const agent = request.agent(app);
 
   await agent.post("/login").send({
@@ -136,7 +137,7 @@ test("user can enter the correct password and become a member", async() =>{
   expect(response.text).toContain("Member");
 });
 
-test("user can enter the correct password and become an admin", async() =>{
+test("user can enter the correct password and become an admin", async () => {
   const agent = request.agent(app);
 
   await agent.post("/login").send({
@@ -151,14 +152,14 @@ test("user can enter the correct password and become an admin", async() =>{
   expect(response.text).toContain("Admin");
 });
 
-test("user can enter the correct password and become a guest again", async() =>{
+test("user can enter the correct password and become a guest again", async () => {
   const agent = request.agent(app);
 
   await agent.post("/login").send({
     email: "test@test.com",
     password: "supersecure123",
   });
-  
+
   await agent.post("/join").send({
     password: process.env.RESET_PASSWORD,
   });
