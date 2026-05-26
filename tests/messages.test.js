@@ -2,7 +2,6 @@ const request = require("supertest");
 const app = require("../app");
 const pool = require("../db/pool");
 
-
 beforeAll(async () => {
   // Throw error if the test is not running in the test setting
   if (process.env.NODE_ENV !== "test") {
@@ -13,7 +12,9 @@ beforeAll(async () => {
     throw new Error("Not in test DB. Aborting.");
   }
   // Truncate the db before first test
-  await pool.query("TRUNCATE users, messages, session RESTART IDENTITY CASCADE");
+  await pool.query(
+    "TRUNCATE users, messages, session RESTART IDENTITY CASCADE",
+  );
 
   // Create the user used for the test
   const agent = request.agent(app);
@@ -34,7 +35,7 @@ afterAll(async () => {
 test("anonymous user can't write messages", async () => {
   const agent = request.agent(app);
 
-  const response = await agent.get("/new")
+  const response = await agent.get("/new");
 
   expect(response.status).toBe(302);
   expect(response.headers.location).toBe("/login");
@@ -98,7 +99,7 @@ test("guest user can't delete messages", async () => {
   });
 
   const { rows } = await pool.query("SELECT message_id FROM messages");
-  
+
   const response = await agent.post("/delete").send({
     messageId: rows[0],
   });
@@ -146,7 +147,7 @@ test("member user can't delete messages", async () => {
   });
 
   const { rows } = await pool.query("SELECT message_id FROM messages");
-  
+
   const response = await agent.post("/delete").send({
     messageId: rows[0].message_id,
   });
