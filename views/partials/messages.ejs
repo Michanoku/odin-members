@@ -25,15 +25,15 @@
                                     </div>
                                     <% if (user && user.admin) { %>
                                         <form class="deleteForm" action="/delete" method="post">
-                                            <input type="hidden" value="<%= message.message_id %>" name="messageId"/>
+                                            <input type="hidden" value="<%= message.message_id %>" name="messageId" />
                                             <button type="submit" class="button accent">Delete</button>
                                         </form>
-                                    <% } %>
+                                        <% } %>
                                 </div>
                 </div>
                 <% }) %>
         </div>
         <% } %>
-<% if (user && user.admin) { %>
-    <script type="text/javascript" src="/scripts/confirmDelete.js"></script>
-<% } %>
+            <% if (user && user.admin) { %>
+                <script type="text/javascript" src="/scripts/confirmDelete.js"></script>
+                <% } %>

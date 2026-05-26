@@ -22,9 +22,7 @@ if (asideButton) {
 
       asideButton.setAttribute("aria-pressed", false);
 
-      asideButton
-        .querySelector("svg use")
-        .setAttribute("href", "#icon-menu");
+      asideButton.querySelector("svg use").setAttribute("href", "#icon-menu");
     }
   });
 }

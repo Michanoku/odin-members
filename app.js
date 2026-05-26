@@ -71,7 +71,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// Get theme from cookie, if any. 
+// Get theme from cookie, if any.
 app.use((req, res, next) => {
   res.locals.theme = req.cookies.theme || "light";
   next();

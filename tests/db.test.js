@@ -14,7 +14,9 @@ beforeAll(async () => {
 
 // Wipe DB before each test to make sure everything is as expected
 beforeEach(async () => {
-  await pool.query("TRUNCATE users, messages, session RESTART IDENTITY CASCADE");
+  await pool.query(
+    "TRUNCATE users, messages, session RESTART IDENTITY CASCADE",
+  );
 });
 
 afterAll(async () => {

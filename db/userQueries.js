@@ -1,35 +1,47 @@
 const pool = require("./pool");
 
 const createUser = async ({ firstName, lastName, email, hash }) => {
-    const { rows } = await pool.query(`
+  const { rows } = await pool.query(
+    `
         INSERT INTO users (first_name, last_name, email, hash) VALUES ($1, $2, $3, $4) RETURNING *;
-        `, [firstName, lastName, email, hash]);
-    return rows[0];
-}
+        `,
+    [firstName, lastName, email, hash],
+  );
+  return rows[0];
+};
 
 const findUserByEmail = async (email) => {
-    const { rows } = await pool.query(`
+  const { rows } = await pool.query(
+    `
         SELECT * FROM users WHERE email = $1;
-        `, [email]);
-    return rows[0];
-}
+        `,
+    [email],
+  );
+  return rows[0];
+};
 
 const findUserById = async (userId) => {
-    const { rows } = await pool.query(`
+  const { rows } = await pool.query(
+    `
         SELECT * FROM users WHERE user_id = $1;
-        `, [userId]);
-    return rows[0];
-}
+        `,
+    [userId],
+  );
+  return rows[0];
+};
 
 const changeLevel = async (member, admin, userId) => {
-    await pool.query(`
+  await pool.query(
+    `
         UPDATE users SET member = $1, admin = $2 WHERE user_id = $3;
-        `, [member, admin, userId]);
-}
+        `,
+    [member, admin, userId],
+  );
+};
 
 module.exports = {
-    createUser,
-    findUserByEmail,
-    findUserById,
-    changeLevel,
-}
+  createUser,
+  findUserByEmail,
+  findUserById,
+  changeLevel,
+};

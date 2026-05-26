@@ -10,10 +10,7 @@ if (themeButton) {
 
     // update UI instantly
     document.documentElement.dataset.theme = data.theme;
-    themeButton.setAttribute(
-      "aria-pressed",
-      data.theme === "dark"
-    );
+    themeButton.setAttribute("aria-pressed", data.theme === "dark");
     themeButton
       .querySelector("svg use")
       .setAttribute("href", `#icon-${data.theme}`);

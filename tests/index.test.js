@@ -23,7 +23,5 @@ test("theme toggle switches theme cookie", async () => {
 
   expect(response.body.theme).toBe("dark");
 
-  expect(response.headers["set-cookie"][0]).toContain(
-    "theme=dark"
-  );
+  expect(response.headers["set-cookie"][0]).toContain("theme=dark");
 });

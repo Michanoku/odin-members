@@ -10,25 +10,22 @@ const validateMessage = [
     .bail()
     .isLength({ max: 255 })
     .withMessage(`Title must not be longer than 255 characters.`),
-  body("message")
-    .trim()
-    .notEmpty()
-    .withMessage("Message is required.")
-]
+  body("message").trim().notEmpty().withMessage("Message is required."),
+];
 
 const getNewMessage = (req, res) => {
-    res.render("messages/new", {title: "New message"});
-}
+  res.render("messages/new", { title: "New message" });
+};
 
 const getAllMessages = () => {
-    const messages = db.getAllMessages();
-    return messages;
-}
+  const messages = db.getAllMessages();
+  return messages;
+};
 
 const deleteMessage = (req, res) => {
-    db.deleteMessage(req.body.messageId);
-    res.redirect("/");
-}
+  db.deleteMessage(req.body.messageId);
+  res.redirect("/");
+};
 
 const postNewMessage = [
   validateMessage,

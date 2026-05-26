@@ -39,14 +39,14 @@
       </a>
     </nav>
     <section class="account">
-      <p> User level: 
+      <p> User level:
         <% if (user.admin) { %>
-         Admin
-        <% } else if (user.member) { %>
-         Member
-        <% } else { %>
-         Guest
-        <% } %>
+          Admin
+          <% } else if (user.member) { %>
+            Member
+            <% } else { %>
+              Guest
+              <% } %>
       </p>
       <p>Logged in as <%= user.email %>
       </p>
