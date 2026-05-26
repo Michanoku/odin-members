@@ -8,7 +8,7 @@ Users can register, log in, post messages, join the clubhouse through secret pas
 
 ## Live Site
 
-Live Demo: [Coming Soon](#)
+Live Demo: [Michanoku Clubhouse on Render](https://michanoku-clubhouse.onrender.com/)
 
 ### Demo Passwords
 
