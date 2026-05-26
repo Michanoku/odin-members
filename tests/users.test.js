@@ -190,6 +190,11 @@ test("user can enter the correct password and become a guest again", async () =>
 test("user is logged out successfully", async () => {
   const agent = request.agent(app);
 
+  await agent.post("/login").send({
+    email: "testor@test.com",
+    password: "supersecure123",
+  });
+
   const logoutResponse = await agent.get("/logout");
 
   expect(logoutResponse.status).toBe(302);
@@ -198,4 +203,20 @@ test("user is logged out successfully", async () => {
   const afterLogout = await agent.get("/");
 
   expect(afterLogout.text).not.toContain("test@test.com");
+});
+
+test("logout destroys session", async () => {
+  const agent = request.agent(app);
+
+  await agent.post("/login").send({
+    email: "testor@test.com",
+    password: "supersecure123",
+  });
+
+  await agent.get("/logout");
+
+  const response = await agent.get("/new");
+
+  expect(response.status).toBe(302);
+  expect(response.headers.location).toBe("/login");
 });
