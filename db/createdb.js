@@ -29,7 +29,13 @@ CREATE TABLE IF NOT EXISTS clubhouse_session (
 
 async function main() {
   console.log("Creating tables...");
-  const client = new Client(config);
+  const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl:
+      process.env.NODE_ENV === "production"
+        ? { rejectUnauthorized: false }
+        : false,
+  });
   await client.connect();
   await client.query(SQL);
   await client.end();
