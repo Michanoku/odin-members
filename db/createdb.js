@@ -1,5 +1,4 @@
 const { Client } = require("pg");
-const config = require("./config");
 
 const SQL = `
 CREATE TABLE IF NOT EXISTS clubhouse_users (
